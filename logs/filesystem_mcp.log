@@ -1,0 +1,6 @@
+2025-06-20 11:17:43,849 - filesystem_mcp - INFO - Filesystem MCP Server starting
+2025-06-20 11:17:43,849 - filesystem_mcp - INFO - Received request with method: initialize
+2025-06-20 11:29:11,109 - filesystem_mcp - INFO - Filesystem MCP Server starting
+2025-06-20 11:29:11,109 - filesystem_mcp - INFO - Received request with method: initialize
+2025-06-20 11:30:19,439 - filesystem_mcp - INFO - Filesystem MCP Server starting
+2025-06-20 11:30:19,439 - filesystem_mcp - INFO - Received request with method: initialize

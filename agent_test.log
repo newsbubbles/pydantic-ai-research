@@ -1,0 +1,11 @@
+2025-06-20 18:21:09,815 - agent_test - INFO - Using OpenRouter as provider
+2025-06-20 18:21:09,816 - agent_test - INFO - Created model: OpenAIModel()
+2025-06-20 18:21:09,816 - agent_test - INFO - Created MCP server with script: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 18:21:09,816 - agent_test - INFO - Created agent with filesystem MCP server
+2025-06-20 18:21:16,347 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 18:21:47,349 - agent_test - ERROR - Error running agent: Expected code to be unreachable, but got: {'role': 'user', 'content': 'what can you do?'}
+2025-06-20 18:52:59,488 - agent_test - INFO - Using OpenRouter as provider
+2025-06-20 18:52:59,488 - agent_test - INFO - Created model: OpenAIModel()
+2025-06-20 18:52:59,488 - agent_test - INFO - Created MCP server with script: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 18:52:59,489 - agent_test - INFO - Created agent with filesystem MCP server
+2025-06-20 18:53:13,359 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"

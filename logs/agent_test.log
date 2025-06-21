@@ -1,0 +1,99 @@
+2025-06-20 11:17:43,805 - agent_test - INFO - Using OpenRouter as provider
+2025-06-20 11:17:43,805 - agent_test - INFO - Created model: OpenAIModel()
+2025-06-20 11:17:43,805 - agent_test - INFO - Making MCP server script executable: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 11:17:43,805 - agent_test - INFO - Created MCP server with script: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 11:17:43,805 - agent_test - INFO - Created agent with filesystem MCP server
+2025-06-20 11:28:16,992 - asyncio - ERROR - an error occurred during closing of asynchronous generator <async_generator object MCPServerStdio.client_streams at 0x7045ecc74640>
+asyncgen: <async_generator object MCPServerStdio.client_streams at 0x7045ecc74640>
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+  |     raise BaseExceptionGroup(
+  | BaseExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/mcp/client/stdio/__init__.py", line 173, in stdio_client
+    |     yield read_stream, write_stream
+    |   File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 234, in client_streams
+    |     yield read_stream, write_stream
+    | GeneratorExit
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 233, in client_streams
+    async with stdio_client(server=server) as (read_stream, write_stream):
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/contextlib.py", line 231, in __aexit__
+    await self.gen.athrow(value)
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/mcp/client/stdio/__init__.py", line 166, in stdio_client
+    async with (
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 778, in __aexit__
+    if self.cancel_scope.__exit__(type(exc), exc, exc.__traceback__):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 457, in __exit__
+    raise RuntimeError(
+RuntimeError: Attempted to exit cancel scope in a different task than it was entered in
+2025-06-20 11:28:16,994 - asyncio - ERROR - an error occurred during closing of asynchronous generator <async_generator object stdio_client at 0x7045ecf2a980>
+asyncgen: <async_generator object stdio_client at 0x7045ecf2a980>
+Traceback (most recent call last):
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/streams/memory.py", line 111, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/streams/memory.py", line 106, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/agent_test.py", line 110, in main
+    async with agent.run_mcp_servers():
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/pydantic_ai/agent.py", line 1702, in run_mcp_servers
+    await exit_stack.enter_async_context(mcp_server)
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/contextlib.py", line 659, in enter_async_context
+    result = await _enter(cm)
+             ^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/pydantic_ai/mcp.py", line 122, in __aenter__
+    await self._client.initialize()
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/mcp/client/session.py", line 122, in initialize
+    result = await self.send_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/mcp/shared/session.py", line 252, in send_request
+    response_or_error = await response_stream_reader.receive()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/streams/memory.py", line 119, in receive
+    await receive_event.wait()
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1774, in wait
+    await self._event.wait()
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/asyncio/locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/osiris/.pyenv/versions/3.12.1/lib/python3.12/asyncio/runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+RuntimeError: aclose(): asynchronous generator is already running
+2025-06-20 18:07:57,123 - agent_test - INFO - Using OpenRouter as provider
+2025-06-20 18:07:57,123 - agent_test - INFO - Created model: OpenAIModel()
+2025-06-20 18:07:57,124 - agent_test - INFO - Created MCP server with script: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 18:07:57,124 - agent_test - INFO - Created agent with filesystem MCP server
+2025-06-20 18:08:08,335 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 18:10:18,965 - agent_test - ERROR - Error running agent: Expected code to be unreachable, but got: {'role': 'user', 'content': 'list the current folder contents'}

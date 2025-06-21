@@ -1,0 +1,115 @@
+└> python src/agent_test_fixed.py
+2025-06-20 18:54:37,615 - agent_test_fixed - INFO - === Agent Test Script Starting ===
+2025-06-20 18:54:37,615 - agent_test_fixed - INFO - Python version: 3.12.1 (main, Mar 31 2025, 15:29:20) [GCC 11.4.0]
+2025-06-20 18:54:37,615 - agent_test_fixed - INFO - Current working directory: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research
+2025-06-20 18:54:37,615 - agent_test_fixed - INFO - OPENAI_API_KEY set: Yes
+2025-06-20 18:54:37,616 - agent_test_fixed - INFO - OPENROUTER_API_KEY set: Yes
+2025-06-20 18:54:37,616 - agent_test_fixed - INFO - Running main function
+2025-06-20 18:54:37,616 - asyncio - DEBUG - Using selector: EpollSelector
+2025-06-20 18:54:37,616 - agent_test_fixed - INFO - Starting main function
+2025-06-20 18:54:37,616 - agent_test_fixed - INFO - Creating agent...
+2025-06-20 18:54:37,616 - agent_test_fixed - INFO - Creating model with OpenRouter provider
+2025-06-20 18:54:37,738 - agent_test_fixed - INFO - OpenRouter provider created
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Creating model with name: anthropic/claude-3-haiku
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Model created successfully
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - MCP server path: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Creating MCP server...
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - MCP server created
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Agent prompt loaded
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Creating agent with MCP server and prompt...
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Agent created successfully
+
+Filesystem Agent (Delta Streaming)
+=====================================
+
+Type 'exit' to quit the program.
+
+2025-06-20 18:54:37,739 - agent_test_fixed - INFO - Starting MCP servers...
+[06/20/25 18:54:38] INFO     === Filesystem MCP Server Starting ===                          filesystem_mcp.py:79
+                    INFO     Python version: 3.12.1 (main, Mar 31 2025, 15:29:20) [GCC       filesystem_mcp.py:80
+                             11.4.0]                                                                             
+                    INFO     Log file: logs/filesystem_mcp.log                               filesystem_mcp.py:81
+                    INFO     Current working directory:                                      filesystem_mcp.py:82
+                             /home/osiris/Projects/wonder/data/projects/pydantic_ai_research                     
+2025-06-20 18:54:38,838 - agent_test_fixed - INFO - MCP servers started successfully
+> hello what files we got?
+2025-06-20 18:54:53,289 - agent_test_fixed - INFO - User input: hello what files we got?
+
+Agent: 2025-06-20 18:54:53,289 - agent_test_fixed - INFO - Starting agent.run_stream...
+2025-06-20 18:54:53,289 - agent_test_fixed - INFO - No message history available for this run
+[06/20/25 18:54:53] INFO     Processing request of type ListToolsRequest                            server.py:523
+2025-06-20 18:54:53,486 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'headers': {'User-Agent': 'pydantic-ai/0.3.1'}, 'files': None, 'idempotency_key': 'stainless-python-retry-066d34dc-3705-40a5-97dc-20c500efbbd8', 'json_data': {'messages': [{'role': 'system', 'content': "\n    # Filesystem Agent\n\n    You are a helpful assistant that specializes in working with the filesystem.\n    Current time: 2025-06-20 17:54:37\n\n    ## Capabilities\n    - You can list files and directories\n    - You can read file contents\n    - You can write content to files\n    - You can get information about files and directories\n\n    ## Limitations\n    - You can only work with files that are accessible to this script\n    - You cannot execute arbitrary code\n    - You cannot access the internet\n\n    ## Instructions\n    - When asked to work with files, use the appropriate tools\n    - Clearly explain what you're doing when using tools\n    - When showing file or directory listings, format them nicely\n    - When showing file contents, display them in an appropriate format\n    "}, {'role': 'user', 'content': 'hello what files we got?'}], 'model': 'anthropic/claude-3-haiku', 'stream': True, 'stream_options': {'include_usage': True}, 'tool_choice': 'auto', 'tools': [{'type': 'function', 'function': {'name': 'list_files', 'description': 'List files and directories in the specified directory', 'parameters': {'properties': {'request': {'$ref': '#/$defs/ListFilesRequest'}}, 'required': ['request'], 'type': 'object', '$defs': {'ListFilesRequest': {'properties': {'directory': {'anyOf': [{'type': 'string'}, {'type': 'null'}], 'description': 'Directory path to list (default: current directory)'}}, 'type': 'object'}}}}}, {'type': 'function', 'function': {'name': 'read_file', 'description': 'Read the contents of a file', 'parameters': {'properties': {'request': {'$ref': '#/$defs/ReadFileRequest'}}, 'required': ['request'], 'type': 'object', '$defs': {'ReadFileRequest': {'properties': {'file_path': {'description': 'Path to the file to read', 'type': 'string'}}, 'required': ['file_path'], 'type': 'object'}}}}}, {'type': 'function', 'function': {'name': 'write_file', 'description': 'Write content to a file', 'parameters': {'properties': {'request': {'$ref': '#/$defs/WriteFileRequest'}}, 'required': ['request'], 'type': 'object', '$defs': {'WriteFileRequest': {'properties': {'file_path': {'description': 'Path to the file to write', 'type': 'string'}, 'content': {'description': 'Content to write to the file', 'type': 'string'}}, 'required': ['file_path', 'content'], 'type': 'object'}}}}}, {'type': 'function', 'function': {'name': 'get_file_info', 'description': 'Get information about a file or directory', 'parameters': {'properties': {'request': {'$ref': '#/$defs/GetFileInfoRequest'}}, 'required': ['request'], 'type': 'object', '$defs': {'GetFileInfoRequest': {'properties': {'file_path': {'description': 'Path to the file or directory', 'type': 'string'}}, 'required': ['file_path'], 'type': 'object'}}}}}]}}
+2025-06-20 18:54:53,487 - openai._base_client - DEBUG - Sending HTTP Request: POST https://openrouter.ai/api/v1/chat/completions
+2025-06-20 18:54:53,487 - httpcore.connection - DEBUG - connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=5 socket_options=None
+2025-06-20 18:54:53,532 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fcfecbb7c50>
+2025-06-20 18:54:53,533 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fcfed0d6dd0> server_hostname='openrouter.ai' timeout=5
+2025-06-20 18:54:53,569 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x7fcfec9a5850>
+2025-06-20 18:54:53,569 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-06-20 18:54:53,570 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-06-20 18:54:53,570 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-06-20 18:54:53,570 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-06-20 18:54:53,570 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-06-20 18:54:54,530 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 20 Jun 2025 17:54:54 GMT'), (b'Content-Type', b'text/event-stream'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Cf-Ray', b'952d224ceeb8e3b4-LIS'), (b'Access-Control-Allow-Origin', b'*'), (b'Cache-Control', b'no-cache'), (b'X-Clerk-Auth-Message', b'Invalid JWT form. A JWT consists of three parts separated by dots. (reason=token-invalid, token-carrier=header)'), (b'X-Clerk-Auth-Reason', b'token-invalid'), (b'X-Clerk-Auth-Status', b'signed-out'), (b'Vary', b'Accept-Encoding'), (b'Server', b'cloudflare')])
+2025-06-20 18:54:54,530 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 18:54:54,530 - openai._base_client - DEBUG - HTTP Response: POST https://openrouter.ai/api/v1/chat/completions "200 OK" Headers({'date': 'Fri, 20 Jun 2025 17:54:54 GMT', 'content-type': 'text/event-stream', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'cf-ray': '952d224ceeb8e3b4-LIS', 'access-control-allow-origin': '*', 'cache-control': 'no-cache', 'x-clerk-auth-message': 'Invalid JWT form. A JWT consists of three parts separated by dots. (reason=token-invalid, token-carrier=header)', 'x-clerk-auth-reason': 'token-invalid', 'x-clerk-auth-status': 'signed-out', 'vary': 'Accept-Encoding', 'server': 'cloudflare'})
+2025-06-20 18:54:54,531 - openai._base_client - DEBUG - request_id: None
+2025-06-20 18:54:54,531 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-06-20 18:54:54,537 - agent_test_fixed - INFO - Agent run_stream started, beginning to stream response...
+2025-06-20 18:54:54,794 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-06-20 18:54:54,794 - httpcore.http11 - DEBUG - response_closed.started
+2025-06-20 18:54:54,795 - httpcore.http11 - DEBUG - response_closed.complete
+[06/20/25 18:54:54] INFO     Processing request of type ListToolsRequest                            server.py:523
+                    INFO     Processing request of type CallToolRequest                             server.py:523
+2025-06-20 18:54:54,803 - agent_test_fixed - INFO - Complete response received, length: 0
+
+
+> 2025-06-21 08:44:25,914 - agent_test_fixed - INFO - Main function completed
+2025-06-21 08:44:25,915 - agent_test_fixed - INFO - Program interrupted by user
+2025-06-21 08:44:25,915 - agent_test_fixed - INFO - Program exit
+2025-06-21 08:44:36,820 - agent_test_iter - INFO - === Agent Test Script Starting ===
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Python version: 3.12.1 (main, Mar 31 2025, 15:29:20) [GCC 11.4.0]
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Current working directory: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - OPENAI_API_KEY set: Yes
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - OPENROUTER_API_KEY set: Yes
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Running main function
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Starting main function
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Creating agent...
+2025-06-21 08:44:36,821 - agent_test_iter - INFO - Creating model with OpenRouter provider
+2025-06-21 08:44:36,925 - agent_test_iter - INFO - OpenRouter provider created
+2025-06-21 08:44:36,925 - agent_test_iter - INFO - Creating model with name: anthropic/claude-3-haiku
+2025-06-21 08:44:36,925 - agent_test_iter - INFO - Model created successfully
+2025-06-21 08:44:36,925 - agent_test_iter - INFO - MCP server path: /home/osiris/Projects/wonder/data/projects/pydantic_ai_research/src/mcp_servers/filesystem_mcp.py
+2025-06-21 08:44:36,925 - agent_test_iter - INFO - Creating MCP server...
+2025-06-21 08:44:36,926 - agent_test_iter - INFO - MCP server created
+2025-06-21 08:44:36,926 - agent_test_iter - INFO - Agent prompt loaded
+2025-06-21 08:44:36,926 - agent_test_iter - INFO - Creating agent with MCP server and prompt...
+2025-06-21 08:44:36,926 - agent_test_iter - INFO - Agent created successfully
+2025-06-21 08:44:36,926 - agent_test_iter - INFO - Starting MCP servers...
+2025-06-21 08:44:37,877 - agent_test_iter - INFO - MCP servers started successfully
+2025-06-21 08:44:49,970 - agent_test_iter - INFO - User input: hello, list the current folder struct
+2025-06-21 08:44:49,971 - agent_test_iter - INFO - No message history available for this run
+2025-06-21 08:44:51,176 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:51,560 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:44:52,814 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:52,904 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "None"}
+2025-06-21 08:44:54,072 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:54,762 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:44:55,342 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:56,092 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:44:56,911 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:57,423 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:44:58,140 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:44:58,949 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:44:59,527 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:00,189 - agent_test_iter - INFO - Tool call: list_files with args: {"directory": "."}
+2025-06-21 08:45:01,007 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:01,306 - agent_test_iter - INFO - Tool call: list_files with args: {"request": {"directory": "."}}
+2025-06-21 08:45:01,932 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:02,748 - agent_test_iter - INFO - Tool call: list_files with args: {"request": {"directory": "."}}
+2025-06-21 08:45:03,670 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:04,431 - agent_test_iter - INFO - Tool call: get_file_info with args: {"request": {"file_path": "."}}
+2025-06-21 08:45:05,206 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:06,120 - agent_test_iter - INFO - Tool call: read_file with args: {"request": {"file_path": "README.md"}}
+2025-06-21 08:45:06,887 - httpx - INFO - HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 08:45:08,140 - agent_test_iter - INFO - End node reached with result: AgentRunResult(output="It seems there is an issue with the tools themselves that is preventing me from executing them properly. Unfortunately, I am unable to list the files in the current directory or read the contents of a file at this time. \n\nLet me summarize what I've learned:\n- I was able to construct the request dictionary correctly for the list_files and get_file_info tools, but there was an issue with the tool implementation that prevented them from executing.\n- I also encountered an issue trying to read a file using the read_file tool.\n- Since I can't execute the filesystem tools, I'm unable to provide the file/directory listing you requested.\n\nI apologize that I couldn't complete the task as requested. Please let me know if there is anything else I can assist with.")
+2025-06-21 08:45:08,140 - agent_test_iter - INFO - Complete output collected, length: 2177
